@@ -1,0 +1,51 @@
+"washing_machine_1":
+{
+    "Monday": 100,
+    "Tuesday": 110,
+    "Wednesday": 120,
+    "Thursday": 130,
+    "Friday": 140,
+    "Saturday": 150,
+    "Sunday": 160,
+},
+"washing_machine_2": {
+    # 同様の構造
+},
+...:
+}
+from flask import Flask, render_template, jsonify
+import requests
+import json
+
+app = Flask(name)
+
+各洗濯機のセンサーのURLリスト
+SENSOR_URLS = [
+"http://your_sensor_api_url_1/",
+"http://your_sensor_api_url_2/",
+"http://your_sensor_api_url_3/",
+"http://your_sensor_api_url_4/",
+"http://your_sensor_api_url_5/",
+"http://your_sensor_api_url_6/",
+"http://your_sensor_api_url_7/",
+"http://your_sensor_api_url_8/",
+]
+
+def get_power_usage():
+    weekly_data = {}
+    for i, url in enumerate(SENSOR_URLS):
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                # データを取得し、週ごとの電力量を処理
+                power_data = json.loads(response.content)
+                weekly_data[f'washingmachine{i + 1}'] = power_data
+            else:
+                print(f"Error fetching data from {url}: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+    print(f"Error fetching data from {url}: {e}")
+
+    return weekly_dat
+
+
+{
